@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ContactRequest;
 use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\JsonResponse;
@@ -23,14 +22,14 @@ class UserController extends Controller
         return response()->json([
             'statusCode' => 200,
             'code' => 'ALL_USERS',
-            'contact' => $user
+            'user' => $user
         ], 200);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  ContactRequest  $request
+     * @param  UserRequest  $request
      * @return JsonResponse
      */
     public function store(UserRequest $request)
@@ -71,15 +70,15 @@ class UserController extends Controller
         if (isset($user)) {
             return response()->json([
                 'statusCode' => 200,
-                'code' => 'CONTACT_FOUND',
-                'message' => 'contact found',
+                'code' => 'USER_FOUND',
+                'message' => 'user found',
                 'user' => $user
             ], 200);
         }
         return response()->json([
             'statusCode' => 404,
-            'code' => 'CONTACT_NOT_FOUND',
-            'message' => 'error finding contact',
+            'code' => 'USER_NOT_FOUND',
+            'message' => 'error finding user',
             'user' => $user,
         ], 404);
     }
@@ -87,7 +86,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  ContactRequest  $request
+     * @param  UserRequest  $request
      * @param  int  $id
      * @return JsonResponse
      */
@@ -104,15 +103,15 @@ class UserController extends Controller
 
             return response()->json([
                 'statusCode' => 200,
-                'code' => 'SUCCESS_UPDATE_CONTACT',
-                'message' => 'contact updated successfully',
+                'code' => 'SUCCESS_UPDATE_USER',
+                'message' => 'user updated successfully',
             ], 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
                 'statusCode' => 500,
-                'code' => 'ERROR_UPDATE_CONTACT',
-                'message' => 'error updating contact',
+                'code' => 'ERROR_UPDATE_USER',
+                'message' => 'error updating user',
                 'errors' => $e->getMessage(),
             ], 500);
         }
