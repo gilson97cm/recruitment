@@ -40,18 +40,18 @@ composer require tymon/jwt-auth
 ## Iniciar el proyecto ⚙️
 
 _Pasos para iniciar la base del proyecto_
-
+_Agregar el servicio en el array de  providers en config/app.php_ 
 ```
-Agregar el servicio en el array de  providers en config/app.php 
 'providers' => [
-    ...
+   ...
     Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 ]
 ```
+```
 php artisan vendor:publish --provider="Tymon\JWTAuth\Providers\LaravelServiceProvider"
 ```
+_Agregar el middleware en App\Http\Kernel.php_
 ```
-Agregar el middleware en App\Http\Kernel.php
  protected $routeMiddleware = [
     ...
       'jwtAuth' =>  \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
