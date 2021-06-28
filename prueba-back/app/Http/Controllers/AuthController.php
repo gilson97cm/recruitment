@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -55,4 +56,20 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        try {
+            JWTAuth::invalidate(JWTAuth::parseToken($request->token));
+            return response()->json([
+                'statusCode' => 200,
+                'code' => 'LOGOUT_SUCCESS',
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'statusCode' => 500,
+                'code' => 'LOGOUT_FAIL',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

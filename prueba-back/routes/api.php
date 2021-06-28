@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('contacts','ContactController');
 Route::post('user-login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout');
 //Route::post('user-register', 'AuthController@register');
 Route::resource('users','UserController');
