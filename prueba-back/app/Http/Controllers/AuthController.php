@@ -55,35 +55,4 @@ class AuthController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return JsonResponse
-     */
-
-    public function register(Request $request)
-    {
-        try {
-            $encrypted_pass = Hash::make($request->password);
-            $user = new User([
-                'email' => $request->email,
-                'password' => $encrypted_pass,
-                'active' => $request->active,
-            ]);
-            $user->save();
-            return response()->json([
-                'statusCode' => 200,
-                'code' => 'SUCCESS_REGISTER_USER',
-                'message' => 'user saved successfully',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'statusCode' => 500,
-                'code' => 'ERROR_REGISTER_USER',
-                'message' => 'error saving user',
-                'errors' => $e->getMessage(),
-            ], 500);
-        }
-    }
 }
